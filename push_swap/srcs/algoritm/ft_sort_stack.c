@@ -1,85 +1,92 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_sort_stack.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pcapalan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/17 19:46:38 by pcapalan          #+#    #+#             */
+/*   Updated: 2024/10/17 19:53:44 by pcapalan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/push_swap.h"
 
-int get_target(t_stack *stack, int nbr) 
+int	ft_stack_len(t_stack *node_top)
 {
-    int target_node;  
-    long long best_index = LONG_MAX; 
+	int			i;
+	t_stack	*aux;
 
-    target_node = 0;
-    while (stack) 
-    {
-        if (stack->val > nbr && stack->val < best_index) {
-            best_index = stack->val; 
-            target_node = stack->val;    
-        }
-        stack = stack->next; 
-    }
-    return (target_node); 
+	aux = node_top;
+	i = 0;
+	while (aux)
+	{
+		aux = aux->next;
+		i++;
+	}
+	return (i);
 }
 
-int get_up_cost(t_stack *a, t_stack *b, int target_node, int nbr)
+void	ft_sort_three(t_stack **a)
 {
-    int push_cost;
-
-    push_cost = ft_index(b, nbr);
-    if (ft_index(a, target_node) > push_cost)
-        push_cost = ft_index(a, target_node);
-    return (push_cost);
-}
-int get_down_cost(t_stack *a, t_stack *b, int target_node, int nbr)
-{
-    int index_node;
-    int push_cost;
-
-    index_node = ft_index(b, nbr);
-    push_cost = ft_stack_len(b) - index_node;
-    if (ft_stack_len(a) - ft_index(a, target_node) > push_cost)
-        push_cost = ft_stack_len(a) - ft_index(a, target_node);
-    return (push_cost);
-}
-int get_cost_place(t_stack *a, t_stack *b, int target_node, int nbr)
-{
-    int cost_node;
-    int cost_target;
-
-    if (ft_index(b, nbr) <= ft_stack_len(b)/2)
-        cost_node = ft_index(b, nbr);
-    else
-        cost_node = ft_stack_len(b) - ft_index(b, nbr);
-    if (ft_index(a, target_node) <= ft_stack_len(a)/2)
-        cost_target = ft_index(a, target_node);
-    else
-        cost_target = ft_stack_len(a)-ft_index(a, target_node);
-    return (cost_node + cost_target);
-} 
-int push_cost(t_stack *a, t_stack *b, int target_node, int nbr)
-{
-    int down_cost;
-    int cost_place;
-    int smallest_cost;
-
-    smallest_cost = get_up_cost(a, b, target_node, nbr);
-    down_cost = get_down_cost(a, b, target_node, nbr);
-    cost_place = get_cost_place(a, b, target_node, nbr);
-    if (down_cost < smallest_cost)
-        smallest_cost = down_cost;
-    if (cost_place < smallest_cost)
-        smallest_cost = cost_place;
-    return (smallest_cost);
+	if (ft_smaller_value(*a) == (*a)->val)
+	{
+		ft_rra(a);
+		ft_sa(a);
+	}
+	else if (ft_bigger_value(*a) == (*a)->val)
+	{
+		ft_ra(a);
+		if (!ft_stack_sorted(*a))
+			ft_sa(a);
+	}
+	else
+	{
+		if (ft_find_index(ft_bigger_value(*a), *a) == 1)
+			ft_rra(a);
+		else
+			ft_sa(a);
+	}
 }
 
-int smallest_cost(t_stack *a, t_stack *b, int target_node)
+void	ft_sort_stack(t_stack **a, t_stack **b)
 {
-    int cost;
-    int current_cost;
+	int			i;
+	t_stack	*tmp;
 
-    cost = push_cost(a, b, target_node, b->val);
-    while (b)
-    {
-        current_cost = push_cost(a, b, target_node, b->val);
-        if (current_cost < cost)
-            cost = current_cost;
-        b = b->next;
-    }
-    return (cost);
+	while (*b)
+	{
+		tmp = *b;
+		i = ft_small_op(*a, *b);
+		while (i >= 0)
+		{
+			if (i == ft_case_rarb(*a, *b, tmp->val))
+				i = ft_apply_rarb(a, b, tmp->val);
+			else if (i == ft_case_rarrb(*a, *b, tmp->val))
+				i = ft_apply_rarrb(a, b, tmp->val);
+			else if (i == ft_case_rrarrb(*a, *b, tmp->val))
+				i = ft_apply_rrarrb(a, b, tmp->val);
+			else if (i == ft_case_rrarb(*a, *b, tmp->val))
+				i = ft_apply_rrarb(a, b, tmp->val);
+			else
+				tmp = tmp->next;
+		}
+	}
+}
+
+void	ft_last_change(t_stack **a)
+{
+	int	smaller;
+	int	pos;
+	int	r_a;
+
+	r_a = 1;
+	smaller = ft_smaller_value(*a);
+	pos = ft_find_index(smaller, *a);
+	if (!(ft_stack_len(*a) / 2 >= pos + 1 || ft_stack_len(*a) / 2 == pos))
+		r_a = -1;
+	while ((*a)->val != smaller && r_a == 1)
+		ft_ra(a);
+	while ((*a)->val != smaller && r_a == -1)
+		ft_rra(a);
 }

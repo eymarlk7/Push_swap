@@ -1,82 +1,73 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_stack_utils.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: pcapalan <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 16:12:20 by pcapalan          #+#    #+#             */
-/*   Updated: 2024/10/12 14:46:43 by pcapalan         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../includes/push_swap.h"
 
-t_stack	*ft_find_max(t_stack *stack)
+int	ft_bigger_value(t_stack *node_top)
 {
-	long	max;
-	t_stack	*max_node;
+	int			bigger;
+	t_stack	*aux;
 
-	if (!stack)
-		return (NULL);
-	max = LONG_MIN;
-	while (stack)
+	aux = node_top;
+	bigger = node_top->val;
+	while (aux)
 	{
-		if (stack->val > max)
-		{
-			max = stack->val;
-			max_node = stack;
-		}
-		stack = stack->next;
+		if (aux->val > bigger)
+			bigger = aux->val;
+		aux = aux->next;
 	}
-	return (max_node);
+	return (bigger);
 }
 
-t_stack	*ft_find_min(t_stack *stack)
+int	ft_smaller_value(t_stack *node_top)
 {
-	long	min;
-	t_stack	*min_node;
+	int			smaller;
+	t_stack	*aux;
 
-	if (!stack)
-		return (NULL);
-	min = LONG_MAX;
-	while (stack)
+	aux = node_top;
+	smaller = node_top->val;
+	while (aux)
 	{
-		if (stack->val < min)
-		{
-			min = stack->val;
-			min_node = stack;
-		}
-		stack = stack->next;
+		if (aux->val < smaller)
+			smaller = aux->val;
+		aux = aux->next;
 	}
-	return (min_node);
+	return (smaller);
 }
 
-int	ft_stack_len(t_stack *stack)
+int	ft_find_index_to_put(int number, t_stack *a)
 {
-	int	i;
-	
-	if (!stack)
-		return (0);
-	i = 0;
-	while (stack)
+	int			i;
+	t_stack	*tmp;
+
+	i = 1;
+	if (number < a->val && number > lst_last(a)->val)
+		i = 0;
+	else if (number > ft_bigger_value(a) || number < ft_smaller_value(a))
+		i = ft_find_index(ft_smaller_value(a), a);
+	else
 	{
-		stack = stack->next;
-		i++;
+		tmp = a->next;
+		while (a->val > number || tmp->val < number)
+		{
+			a = a->next;
+			tmp = a->next;
+			i++;
+		}
 	}
 	return (i);
 }
-int ft_index(t_stack *stack, int nbr)
-{
-    int index;
 
-    index = 0;
-    while (stack)
-    {
-        if (stack->val == nbr)
-            return (index);
-        stack = stack->next;
-        index++;
-    }
-    return (-1);
+int	ft_find_index(int val, t_stack *node_top)
+{
+	int			pos;
+	t_stack	*aux;
+
+	aux = node_top;
+	pos = -1;
+	while (aux)
+	{
+		pos++;
+		if (aux->val == val)
+			break ;
+		aux = aux->next;
+	}
+	return (pos);
 }

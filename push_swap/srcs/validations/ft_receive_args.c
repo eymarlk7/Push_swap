@@ -6,7 +6,7 @@
 /*   By: pcapalan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 14:11:53 by pcapalan          #+#    #+#             */
-/*   Updated: 2024/10/12 14:58:21 by pcapalan         ###   ########.fr       */
+/*   Updated: 2024/10/17 19:09:49 by pcapalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	checker_arg(char *arg)
 {
 	int	i;
-	
+
 	i = 0;
 	while (arg[i])
 	{
@@ -36,7 +36,7 @@ static t_stack	*ft_subprocess(char **av)
 {
 	t_stack	*a;
 	char	**split;
-	int			i;
+	int		i;
 
 	a = NULL;
 	split = ft_split(av[1], 32);
@@ -79,4 +79,3 @@ t_stack	*ft_process(int ac, char **av, int i, int j)
 	}
 	return (a);
 }
-

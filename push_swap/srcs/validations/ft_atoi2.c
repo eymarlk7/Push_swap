@@ -6,7 +6,7 @@
 /*   By: pcapalan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 14:15:55 by pcapalan          #+#    #+#             */
-/*   Updated: 2024/10/11 14:15:59 by pcapalan         ###   ########.fr       */
+/*   Updated: 2024/10/17 19:01:34 by pcapalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,3 @@ int	ft_atoi2(const char *str, char **split)
 		ft_split_error(split);
 	return (sgn * result);
 }
-
