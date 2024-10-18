@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_stack_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pcapalan <pcapalan@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/18 13:57:52 by pcapalan          #+#    #+#             */
+/*   Updated: 2024/10/18 13:57:55 by pcapalan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/push_swap.h"
 
 int	ft_bigger_value(t_stack *node_top)
 {
-	int			bigger;
+	int		bigger;
 	t_stack	*aux;
 
 	aux = node_top;
@@ -18,7 +30,7 @@ int	ft_bigger_value(t_stack *node_top)
 
 int	ft_smaller_value(t_stack *node_top)
 {
-	int			smaller;
+	int		smaller;
 	t_stack	*aux;
 
 	aux = node_top;
@@ -34,7 +46,7 @@ int	ft_smaller_value(t_stack *node_top)
 
 int	ft_find_index_to_put(int number, t_stack *a)
 {
-	int			i;
+	int		i;
 	t_stack	*tmp;
 
 	i = 1;
@@ -57,7 +69,7 @@ int	ft_find_index_to_put(int number, t_stack *a)
 
 int	ft_find_index(int val, t_stack *node_top)
 {
-	int			pos;
+	int		pos;
 	t_stack	*aux;
 
 	aux = node_top;

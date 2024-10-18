@@ -27,7 +27,7 @@ void	ft_split_error(char **str)
 	while (str[i])
 		free(str[i++]);
 	free(str);
-	write(1, "Error\n", 6);
+	write(2, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }
 
@@ -35,6 +35,6 @@ void	ft_general_error(t_stack *stack, char **split)
 {
 	ft_free_str(split);
 	ft_free_stack(stack);
-	write(1, "Error\n", 6);
+	write(2, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }

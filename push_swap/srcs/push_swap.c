@@ -25,6 +25,8 @@ int	main(int argc, char **argv)
 		ft_error(a);
 	if (!ft_stack_sorted(a))
 	{
+		if (ft_stack_len(a) == 2)
+			ft_sa(&a);
 		while (ft_stack_len(a) > 3)
 			ft_pb(&b, &a);
 		if (ft_stack_len(a) == 3 && !ft_stack_sorted(a))

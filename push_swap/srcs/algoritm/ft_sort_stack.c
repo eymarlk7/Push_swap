@@ -14,7 +14,7 @@
 
 int	ft_stack_len(t_stack *node_top)
 {
-	int			i;
+	int		i;
 	t_stack	*aux;
 
 	aux = node_top;
@@ -51,13 +51,13 @@ void	ft_sort_three(t_stack **a)
 
 void	ft_sort_stack(t_stack **a, t_stack **b)
 {
-	int			i;
+	int		i;
 	t_stack	*tmp;
 
 	while (*b)
 	{
 		tmp = *b;
-		i = ft_small_op(*a, *b);
+		i = min_operations_for_push(*a, *b);
 		while (i >= 0)
 		{
 			if (i == ft_case_rarb(*a, *b, tmp->val))

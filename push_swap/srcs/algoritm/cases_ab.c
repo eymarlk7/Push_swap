@@ -12,9 +12,9 @@
 
 #include "../../includes/push_swap.h"
 
-int	ft_small_op(t_stack *a, t_stack *b)
+int	min_operations_for_push(t_stack *a, t_stack *b)
 {
-	int			i;
+	int		i;
 	t_stack	*tmp;
 
 	tmp = b;
@@ -51,7 +51,8 @@ int	ft_case_rrarrb(t_stack *a, t_stack *b, int nbr)
 	i = 0;
 	if (ft_find_index_to_put(nbr, a))
 		i = ft_stack_len(a) - ft_find_index_to_put(nbr, a);
-	if ((i < (ft_stack_len(b) - ft_find_index(nbr, b))) && ft_find_index(nbr, b))
+	if ((i < (ft_stack_len(b) - ft_find_index(nbr, b))) && ft_find_index(nbr,
+			b))
 		i = ft_stack_len(b) - ft_find_index(nbr, b);
 	return (i);
 }
