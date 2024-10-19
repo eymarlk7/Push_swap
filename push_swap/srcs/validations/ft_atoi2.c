@@ -11,30 +11,31 @@
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
-#include <limits.h>
 
-int	ft_atoi2(const char *str, char **split)
+int	ft_atoi2(const char *str)
 {
-	int				sgn;
-	long long int	result;
+	long	result;
+	int		sign;
 
 	result = 0;
-	sgn = 1;
+	sign = 1;
 	while (*str == ' ' || *str == '\t' || (*str >= 10 && *str <= 13))
 		str++;
 	if (*str == '-')
 	{
-		sgn = -1;
+		sign = -1;
 		str++;
 	}
 	else if (*str == '+')
 		str++;
-	while (*str)
+	while (*str >= '0' && *str <= '9')
 	{
-		result = result * 10 + (*str - 48);
+		result = result * 10 + (*str - '0');
+		if (sign == 1 && result > INT_MAX)
+			return (INT_MAX);
+		if (sign == -1 && -result < INT_MIN)
+			return (INT_MIN);
 		str++;
 	}
-	if ((sgn * result) > 2147483647 || (sgn * result) < -2147483648)
-		ft_split_error(split);
-	return (sgn * result);
+	return (int)(result * sign);
 }

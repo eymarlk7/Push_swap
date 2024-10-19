@@ -13,6 +13,7 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "../libft/libft.h"
+# include <limits.h>
 
 typedef struct stack
 {
@@ -27,7 +28,7 @@ t_stack				*ft_process(int ac, char **av, int i, int j);
 int					ft_check_dup(t_stack **a);
 int					ft_stack_len(t_stack *node_top);
 int					ft_stack_sorted(t_stack *stack_a);
-int					ft_atoi2(const char *nptr, char **split);
+int					ft_atoi2(const char *nptr);
 
 int					ft_bigger_value(t_stack *node_top);
 int					ft_smaller_value(t_stack *node_top);
