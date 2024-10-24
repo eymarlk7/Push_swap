@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcapalan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pcapalan <pcapalan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 15:15:35 by pcapalan          #+#    #+#             */
-/*   Updated: 2024/10/13 12:59:33 by pcapalan         ###   ########.fr       */
+/*   Updated: 2024/10/20 12:51:55 by pcapalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+
 # include "../libft/libft.h"
 # include <limits.h>
 
@@ -21,6 +22,8 @@ typedef struct stack
 	struct stack	*next;
 }					t_stack;
 
+# define ATOI_INDICATOR_ERROR 21474836479
+
 t_stack				*lst_last(t_stack *stack);
 t_stack				*create_stack_node(int val);
 t_stack				*ft_process(int ac, char **av, int i, int j);
@@ -28,7 +31,7 @@ t_stack				*ft_process(int ac, char **av, int i, int j);
 int					ft_check_dup(t_stack **a);
 int					ft_stack_len(t_stack *node_top);
 int					ft_stack_sorted(t_stack *stack_a);
-int					ft_atoi2(const char *nptr);
+long int			ft_atoi2(const char *nptr);
 
 int					ft_bigger_value(t_stack *node_top);
 int					ft_smaller_value(t_stack *node_top);
@@ -43,7 +46,6 @@ void				ft_display_stack(t_stack *stack);
 void				add_stack_back(t_stack **stack, int val);
 void				ft_general_error(t_stack *stack, char **split);
 
-// Operations
 void				ft_sa(t_stack **a);
 void				ft_sb(t_stack **b);
 void				ft_pa(t_stack **a, t_stack **b);
@@ -59,7 +61,6 @@ void				ft_rrb(t_stack **b);
 void				ft_rrr2(t_stack **b);
 void				ft_rrr(t_stack **a, t_stack **b);
 
-// Algoritm
 void				ft_sort_three(t_stack **a);
 void				ft_last_change(t_stack **a);
 void				ft_sort_stack(t_stack **a, t_stack **b);

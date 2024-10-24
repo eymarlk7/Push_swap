@@ -3,28 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_receive_args.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcapalan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pcapalan <pcapalan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 14:11:53 by pcapalan          #+#    #+#             */
-/*   Updated: 2024/10/17 19:09:49 by pcapalan         ###   ########.fr       */
+/*   Updated: 2024/10/20 12:56:57 by pcapalan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
-#include <limits.h>
 
 static int	checker_arg(char *arg)
 {
 	int	i;
-	int	count_zero;
 
 	i = 0;
-	count_zero = 0;
 	while (arg[i])
 	{
-		if (arg[i] == '0')
-			count_zero++;
-		else if (arg[i] == '-' || arg[i] == '+')
+		if (arg[i] == '-' || arg[i] == '+')
 		{
 			i++;
 			if (!(arg[i] >= '0' && arg[i] <= '9'))
@@ -34,22 +29,19 @@ static int	checker_arg(char *arg)
 			return (-1);
 		i++;
 	}
-	if (count_zero == i && i > 1)
-		return (-1);
 	return (0);
 }
 
 int	check_range(char *argv)
 {
-	int	i;
-	int	nbr;
+	int		i;
+	long	nbr;
 
 	i = -1;
 	nbr = ft_atoi2(argv);
 	while (argv[++i])
 	{
-		if ((nbr == INT_MAX && ft_strcmp(argv, "2147483647") != 0)
-			|| (nbr == INT_MIN && ft_strcmp(argv, "-2147483648") != 0))
+		if (nbr == ATOI_INDICATOR_ERROR)
 			return (-1);
 	}
 	return (0);
